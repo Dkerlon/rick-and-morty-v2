@@ -1,0 +1,33 @@
+.cards{
+    width: 96%;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 19%;
+    border: 2px solid #ccc;
+    padding: 5px;
+}
+
+.filterContainer{
+    width: 90%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-content: center;
+    margin: 30px auto;
+}
+
+.name, select{
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 180px;
+    text-align: left;
+}

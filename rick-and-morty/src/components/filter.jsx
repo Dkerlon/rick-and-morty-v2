@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Card from "./card"
-
+import '../css/card.css'
 export default function Filters(){
 
     const [name,setName] = useState('')
@@ -40,8 +40,9 @@ export default function Filters(){
     },[name, species, gender, status])
 
     return (
+        <>
         <div className="filterContainer">
-            <input type="text"  placeholder="Filter by name" value={name} onChange={(e) => setName(e.target.value)}/>
+            <input type="text"  placeholder="Filter by name" value={name} onChange={(e) => setName(e.target.value)} className='name'/>
 
             <select className="species" value={species} onChange={(e) => setSpecies(e.target.value)}>
 
@@ -68,8 +69,8 @@ export default function Filters(){
                 <option value='dead'>dead</option>
                 <option value='unknown'>unknown</option>
             </select>
-
-            <Card lista={lista}/>
         </div>
+        <Card lista={lista}/>
+        </>
     )
 }

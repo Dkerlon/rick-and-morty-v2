@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 import Nav from "../components/nav"
-
+import '../css/infoCard.css'
 export default function InfoCard() {
     const { id } = useParams()
     const [character, setCharacter] = useState(null)
@@ -30,14 +30,15 @@ export default function InfoCard() {
                 <p>Loading...</p>
             ) : (
                 character && (
-                    <div>
+                    <div className="container">
                         <header>
-                            <Link to='/'>Go Back</Link>
-                            <img src={character.image} alt={character.name} />
+                            <div className="image">
+                                <img src={character.image} alt={character.name} />
+                            </div>
                             <h1>{character.name}</h1>
                         </header>
                         <main>
-                            <div>
+                            <div className="information">
                                 <h2>Information</h2>
                                 <ul>
                                     <li>
@@ -56,10 +57,13 @@ export default function InfoCard() {
                                         <h3>Origin</h3>
                                         <span>{character.origin.name}</span>
                                     </li>
-                                    <li>
-                                        <h3>Type</h3>
-                                        <span>{character.type}</span>
-                                    </li>
+                                </ul>
+                                <Link className="backLink" to='/'>Go Back</Link>
+                            </div>
+                            <div className="episode">
+                            <h2 style={{marginBottom:'10px'}}>Episodes</h2>
+                                <ul>
+                                    {character.episode.map((el) => (<li><b>episode:</b> {el}</li>))}
                                 </ul>
                             </div>
                         </main>
