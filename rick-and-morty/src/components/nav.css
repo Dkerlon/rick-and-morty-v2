@@ -1,0 +1,29 @@
+nav{
+    display: flex;
+    width: 100%;
+    padding: 0 10%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ccc;
+    height: 60px;
+}
+
+.navList{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.link{
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.logo{
+    margin-top: 60px;
+    width: 100%;
+    text-align: center;
+}
+
