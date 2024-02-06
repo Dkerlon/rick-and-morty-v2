@@ -7,15 +7,10 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from './pages/Home'
 import Locations from './pages/Location'
 import Episodes from './pages/Episodes'
-import Card from './components/card'
 
 const router = createBrowserRouter([{
   path: '/',
-  element: <Home/>, 
-  children: [{
-    path: '/id?',
-    element: <Card/>
-  }]
+  element: <Home/>
 },
 {
   path: '/location',

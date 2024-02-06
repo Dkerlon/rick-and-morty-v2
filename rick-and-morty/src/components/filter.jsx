@@ -70,12 +70,13 @@ export default function Filters(){
             </select>
 
             <div className="card">
-                {lista.map((el) => (
+                {lista && lista.map((el) => (
                 <div key={el.id}>
-                    <img src={el.image}/>
+                    <img src={el.image} alt={el.name} />
                     <h2>{el.name}</h2>
                     <p>{el.species}</p>
-                </div>))}
+                </div>
+                ))}
             </div>
         </div>
     )
