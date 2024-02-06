@@ -7,6 +7,8 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from './pages/Home'
 import Locations from './pages/Location'
 import Episodes from './pages/Episodes'
+import Card from './components/card'
+import InfoCard from './pages/infoCards'
 
 const router = createBrowserRouter([{
   path: '/',
@@ -19,6 +21,9 @@ const router = createBrowserRouter([{
 {
   path: '/episodes',
   element: <Episodes/>
+},{
+  path:'/:id',
+  element:<InfoCard/>
 }])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

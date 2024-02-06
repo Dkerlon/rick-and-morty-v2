@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Card from "./card"
 
 export default function Filters(){
 
@@ -16,7 +17,6 @@ export default function Filters(){
         const novaLista = data.results
         
         setLista(novaLista)
-        console.log(novaLista)
     }
 
     useEffect(() => {
@@ -69,15 +69,7 @@ export default function Filters(){
                 <option value='unknown'>unknown</option>
             </select>
 
-            <div className="card">
-                {lista && lista.map((el) => (
-                <div key={el.id}>
-                    <img src={el.image} alt={el.name} />
-                    <h2>{el.name}</h2>
-                    <p>{el.species}</p>
-                </div>
-                ))}
-            </div>
+            <Card lista={lista}/>
         </div>
     )
 }
