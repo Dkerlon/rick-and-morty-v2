@@ -7,12 +7,14 @@ export default function Filters(){
     const [gender,setGender] = useState('')
     const [status,setStatus] = useState('')
     const [page,setPage] = useState(1)
+
     const [lista,setLista] = useState([])
     
     async function fetchAPI(URL) {
-        const response = await fetch(`${URL}/?name=${name}&species=${species}&gender=${gender}&status=${status}&page=${page}`)
+        const response = await fetch(`${URL}/?name=${name}&species=${species}&gender=${gender}&status=${status}`)
         const data = await response.json()
         const novaLista = data.results
+        
         setLista(novaLista)
         console.log(novaLista)
     }
@@ -48,11 +50,7 @@ export default function Filters(){
                 <option value='alien'>alien</option>
                 <option value='Humanoid'>Humanoid</option>
                 <option value='Poopybutthole'>Poopybutthole</option>
-                <option value='Mythological Creature
-
-'>Mythological Creature
-
-</option>
+                <option value='Mythological Creature'>Mythological Creature</option>
                 <option value='Humanoid'>Humanoid</option>
             </select>
 
