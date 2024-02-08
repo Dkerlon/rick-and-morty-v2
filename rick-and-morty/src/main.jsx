@@ -9,6 +9,8 @@ import Locations from './pages/Location'
 import Episodes from './pages/Episodes'
 import Card from './components/card'
 import InfoCard from './pages/infoCards'
+import CardLocation from './components/cardLocation'
+
 
 const router = createBrowserRouter([{
   path: '/',
@@ -23,6 +25,9 @@ const router = createBrowserRouter([{
   element: <Episodes/>
 },{
   path:'/:id',
+  element:<InfoCard/>
+},{
+  path:'/location/:id',
   element:<InfoCard/>
 }])
 
