@@ -7,7 +7,7 @@ export default function Nav(){
     return (
         <>
         <nav>
-            <img src={logo} alt="img"/>
+            <Link to='/'><img src={logo} alt="img"/></Link>
             <ul className="navList">
                 <li><Link className="link" to='/'>Home</Link></li>
                 <li><Link className="link" to='/location'>Location</Link></li>

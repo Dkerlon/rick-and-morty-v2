@@ -63,7 +63,7 @@ export default function InfoCard() {
                             <div className="episode">
                             <h2 style={{marginBottom:'10px'}}>Episodes</h2>
                                 <ul>
-                                    {character.episode.map((el) => (<li><b>episode:</b> {el}</li>))}
+                                    {character.episode.map((el) => (<li key={el.id}><b>episode:</b> {el}</li>))}
                                 </ul>
                             </div>
                         </main>

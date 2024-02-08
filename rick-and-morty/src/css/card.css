@@ -31,3 +31,24 @@
     width: 180px;
     text-align: left;
 }
+
+.navPages{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.navPages button{
+    background-color: rgb(25, 87, 6);
+    padding: 5px 15px;
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.navPages button:hover{
+    opacity: 0.9;
+    cursor: pointer;
+}

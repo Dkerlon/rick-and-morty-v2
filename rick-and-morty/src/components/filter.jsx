@@ -8,15 +8,17 @@ export default function Filters(){
     const [gender,setGender] = useState('')
     const [status,setStatus] = useState('')
     const [page,setPage] = useState(1)
-
+    const [maxPages,setMaxPages] = useState()
     const [lista,setLista] = useState([])
-    
+
     async function fetchAPI(URL) {
-        const response = await fetch(`${URL}/?name=${name}&species=${species}&gender=${gender}&status=${status}`)
+        const response = await fetch(`${URL}/?page=${page}&name=${name}&species=${species}&gender=${gender}&status=${status}`)
         const data = await response.json()
         const novaLista = data.results
-        
+
         setLista(novaLista)
+        setMaxPages(data.info.pages)
+
     }
 
     useEffect(() => {
@@ -30,14 +32,13 @@ export default function Filters(){
                 URL = 'https://rickandmortyapi.com/api/character'
                 fetchAPI(URL)
             } else if (urlPage[1] === '/location') {
-                console.log('location')
-            } else if (urlPage[1] === '/episodes') {
-                console.log('episodes')
-            }
 
+            } else if (urlPage[1] === '/episodes') {
+
+            }
         }
         handleFilter()
-    },[name, species, gender, status])
+    },[name, species, gender, status, page])
 
     return (
         <>
@@ -60,17 +61,23 @@ export default function Filters(){
                 <option value='Female'>Female</option>
                 <option value='Male'>Male</option>
                 <option value='Genderless'>Genderless</option>
-                <option value='unknown'>unknown</option>
+                <option value='unknown'>Unknown</option>
             </select>
 
             <select className="status" value={status} onChange={(e) => setStatus(e.target.value)}>
                 <option value=''>Status</option>
-                <option value='alive'>alive</option>
-                <option value='dead'>dead</option>
-                <option value='unknown'>unknown</option>
+                <option value='alive'>Alive</option>
+                <option value='dead'>Dead</option>
+                <option value='unknown'>Unknown</option>
             </select>
         </div>
         <Card lista={lista}/>
+        <div className="navPages">
+        <button onClick={() => setPage(1)}>Página 1</button>
+        <button onClick={() => setPage(page+1)}>Avançar Página</button>
+        <button onClick={() => setPage(page-1)}>Voltar Página</button>
+        <button onClick={() => setPage(maxPages)}>Página {maxPages}</button>
+        </div>
         </>
     )
 }

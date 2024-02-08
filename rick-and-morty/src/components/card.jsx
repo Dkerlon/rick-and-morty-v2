@@ -3,7 +3,6 @@ import '../css/card.css'
 export default function Card(props){
 
     const lista = Array.isArray(props.lista) ? [...props.lista] : []
-    console.log(lista)
 
     return (
         <div className="cards">
