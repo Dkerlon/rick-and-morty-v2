@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import Card from "./card"
 import '../css/card.css'
+import {BsBoxArrowLeft} from 'react-icons/bs'
+
 export default function Filters(){
 
     const [name,setName] = useState('')
@@ -74,10 +76,11 @@ export default function Filters(){
         <Card lista={lista}/>
         <div className="navPages">
         <button onClick={() => setPage(1)}>Página 1</button>
-        <button onClick={() => setPage(page+1)}>Avançar Página</button>
         <button onClick={() => setPage(page-1)}>Voltar Página</button>
+        <button onClick={() => setPage(page+1)}>Avançar Página</button>
         <button onClick={() => setPage(maxPages)}>Página {maxPages}</button>
         </div>
+        <span style={{textAlign:'center',width:'100%',display:'inline-block',color:'#ccc',opacity:'0.8', marginBottom:'30px'}}>você está na página {page}</span>
         </>
     )
 }

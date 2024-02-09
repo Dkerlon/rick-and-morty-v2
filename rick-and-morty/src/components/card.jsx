@@ -12,7 +12,7 @@ export default function Card(props){
                     <div className="info">
                         <h2>{el.name}</h2>
                         <p>{el.species}</p>
-                        <Link to={'/' + el.id}>Veja mais</Link>
+                        <Link className="buttonVejaMais" to={'/' + el.id}>Veja mais</Link>
                     </div>
                 </div>
                 ))}

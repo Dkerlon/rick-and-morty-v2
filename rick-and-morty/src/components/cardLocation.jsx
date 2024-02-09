@@ -1,5 +1,4 @@
 import { Link, useParams } from "react-router-dom"
-import '../css/cardLocation.css'
 export default function CardLocation(props){
 
     const lista = Array.isArray(props.lista) ? [...props.lista] : []
@@ -11,7 +10,7 @@ export default function CardLocation(props){
                     <div className="infoLocation">
                         <h2>{el.name}</h2>
                         <p style={{opacity:'0.8'}}>{el.type}</p>
-                        <Link to={'/location/' + el.id}>Veja mais</Link>
+                        <Link className="buttonVejaMais" to={'/location/' + el.id}>Veja mais</Link>
                     </div>
                 </div>
                 ))}

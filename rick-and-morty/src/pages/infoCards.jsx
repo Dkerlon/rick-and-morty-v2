@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 
+import {BsBoxArrowLeft} from 'react-icons/bs'
 import Nav from "../components/nav"
 import '../css/infoCard.css'
 import '../css/card.css'
@@ -88,7 +89,7 @@ export default function InfoCard() {
                         </>
                     ))}
                 </div>
-                <Link to={'/location'} className="backLink">Go Back</Link>
+                <Link className="backLink" to='/location' style={{margin:'30px 0'}}>Go Back <BsBoxArrowLeft/></Link>
                 </>
             )
         } else {
@@ -132,7 +133,7 @@ export default function InfoCard() {
                                                 <span>{character.origin ? character.origin.name : 'Unknown'}</span>
                                             </li>
                                         </ul>
-                                        <Link className="backLink" to='/'>Go Back</Link>
+                                        <Link className="backLink" to='/'>Go Back <BsBoxArrowLeft/></Link>
                                     </div>
                                     {character.episode && (
                                         <div className="episode">
@@ -182,7 +183,7 @@ export default function InfoCard() {
         <>
             <Nav />
             {!loading ? render(1): ''}
-            {!loading1 && residents ? render(2): <p>Loading...</p>}
+            {!loading1 && residents ? render(2): ''}
         </>
     )
 }

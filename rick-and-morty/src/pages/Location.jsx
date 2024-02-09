@@ -131,6 +131,7 @@ export default function Locations(){
                 <button onClick={() => setPage(page-1)}>Voltar Página</button>
                 <button onClick={() => setPage(maxPages)}>Página {maxPages}</button>
         </div>
+        <span style={{textAlign:'center',width:'100%',display:'inline-block',color:'#ccc',opacity:'0.8', marginBottom:'30px'}}>você está na página {page}</span>
     </>
     )
 }
