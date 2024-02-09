@@ -11,7 +11,6 @@ export default function CardLocation(props){
                     <div className="infoLocation">
                         <h2>{el.name}</h2>
                         <p style={{opacity:'0.8'}}>{el.type}</p>
-                        <p style={{opacity:'0.8'}}>{el.dimension}</p>
                         <Link to={'/location/' + el.id}>Veja mais</Link>
                     </div>
                 </div>

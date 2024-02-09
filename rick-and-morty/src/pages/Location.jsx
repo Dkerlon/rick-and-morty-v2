@@ -1,6 +1,9 @@
 import CardLocation from "../components/cardLocation"
 import Nav from "../components/nav"
 import { useState, useEffect } from "react"
+import locationLogo from '../assets/locationLogo.svg'
+import vector from '../assets/vector.png'
+
 
 export default function Locations(){
     const [name,setName] = useState('')
@@ -9,18 +12,17 @@ export default function Locations(){
 
     const [page,setPage] = useState(1)
     const [maxPages,setMaxPages] = useState()
+
     const [lista,setLista] = useState([])
 
     async function fetchAPI(URL) {
+
         const response = await fetch(`${URL}/?page=${page}&name=${name}&type=${type}&dimension=${dimension}`)
         const data = await response.json()
         const novaLista = data.results
 
-        console.log(novaLista)
-
         setLista(novaLista)
         setMaxPages(data.info.pages)
-
     }
 
     useEffect(() => {
@@ -40,6 +42,9 @@ export default function Locations(){
     return (
     <>
     <Nav/>
+    <div className="logo">
+            <img src={vector}/>
+    </div>
     <div className="filterContainer">
             <input type="text"  placeholder="Filter by name" value={name} onChange={(e) => setName(e.target.value)} className='name'/>
 

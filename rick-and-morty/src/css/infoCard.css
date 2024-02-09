@@ -73,3 +73,19 @@ main{
 .backLink:hover{
     color: #ccc;
 }
+
+.container_description{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.description{
+    width: 50%;
+    margin: 50px auto;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+}
