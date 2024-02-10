@@ -1,7 +1,6 @@
 import CardLocation from "../components/cardLocation"
 import Nav from "../components/nav"
 import { useState, useEffect } from "react"
-import locationLogo from '../assets/locationLogo.svg'
 import vector from '../assets/vector.png'
 
 

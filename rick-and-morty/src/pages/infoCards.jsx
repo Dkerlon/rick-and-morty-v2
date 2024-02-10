@@ -50,7 +50,9 @@ export default function InfoCard() {
                 const residentsData = await Promise.all(promise)
                 setResidentsEpisodes(residentsData)
             }
-        }catch {}
+        }catch(error) {
+            console.error("Error fetching residents:", error)
+        }
     }
 
     useEffect(() => {
@@ -67,6 +69,7 @@ export default function InfoCard() {
                     console.error("Error fetching character:", error)
                     setLoading(true)
                     setLoading1(true)
+                    setLoading2(true)
                 }
             } else if (urlPage[1] === `/location/${id}`) {
                 try {
@@ -80,9 +83,10 @@ export default function InfoCard() {
 
                     await searchResidents()
                 } catch (error) {
-                    console.error("Error fetching character:", error)
+                    console.error("Error fetching location:", error)
                     setLoading(true)
                     setLoading1(true)
+                    setLoading2(true)
                 }
             } else if (urlPage[1] === `/episodes/${id}`){
                 try {
@@ -100,7 +104,10 @@ export default function InfoCard() {
                     await searchResidentsEpisodes()
                     
                 } catch{
-
+                    console.error("Error fetching episode:", error)
+                    setLoading(true)
+                    setLoading1(true)
+                    setLoading2(true)
                 }
             }
         }

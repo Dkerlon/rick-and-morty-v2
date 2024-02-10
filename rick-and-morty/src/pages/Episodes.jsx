@@ -1,7 +1,7 @@
 import CardEpisodes from "../components/cardEpisodes"
 import Nav from "../components/nav"
 import { useState, useEffect } from "react"
-import InfoCard from "./infoCards"
+
 import rickandmorty from  '../assets/rickandmorty.png'
 
 export default function Locations(){
@@ -20,7 +20,6 @@ export default function Locations(){
 
         setLista(novaLista)
         setMaxPages(data.info.pages)
-        console.log(novaLista)
     }
 
     useEffect(() => {
@@ -53,7 +52,6 @@ export default function Locations(){
                 <button onClick={() => setPage(page-1)}>Voltar Página</button>
                 <button onClick={() => setPage(maxPages)}>Página {maxPages}</button>
         </div>
-        <InfoCard/>
         <span style={{textAlign:'center',width:'100%',display:'inline-block',color:'#ccc',opacity:'0.8', marginBottom:'30px'}}>você está na página {page}</span>
     </>
     )
