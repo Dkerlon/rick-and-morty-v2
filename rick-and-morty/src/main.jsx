@@ -29,6 +29,9 @@ const router = createBrowserRouter([{
 },{
   path:'/location/:id',
   element:<InfoCard/>
+},{
+  path:'/episodes/:id',
+  element:<InfoCard/>
 }])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

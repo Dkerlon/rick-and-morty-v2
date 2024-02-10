@@ -13,9 +13,13 @@ export default function InfoCard() {
 
     const [loading, setLoading] = useState(true)
     const [loading1, setLoading1] = useState(true)
+    const [loading2, setLoading2] = useState(true)
 
-    const [residentsURL, setResidentsURL] = useState();
-    const [residents, setResidents] = useState([]);
+    const [residentsURL, setResidentsURL] = useState()
+    const [residentsURLEpisode, setResidentsURLEpisode] = useState()
+
+    const [residents, setResidents] = useState([])
+    const [residentsEpisode, setResidentsEpisodes] = useState([])
 
     const searchResidents = async () => {
         try {
@@ -33,6 +37,20 @@ export default function InfoCard() {
         } catch (error) {
             console.error("Error fetching residents:", error)
         }
+    }
+
+    const searchResidentsEpisodes = async () => {
+        try {
+            if(residentsURLEpisode) {
+                const promise = residentsURLEpisode.map(async (residentsURLEpisode) => {
+                    const response = await fetch(residentsURLEpisode)
+                    const data = await response.json()
+                    return data
+                })
+                const residentsData = await Promise.all(promise)
+                setResidentsEpisodes(residentsData)
+            }
+        }catch {}
     }
 
     useEffect(() => {
@@ -66,10 +84,28 @@ export default function InfoCard() {
                     setLoading(true)
                     setLoading1(true)
                 }
+            } else if (urlPage[1] === `/episodes/${id}`){
+                try {
+                    const response = await fetch(`https://rickandmortyapi.com/api/episode/${id}`)
+                    const data = await response.json()
+
+                    setCharacter(data)
+
+                    setLoading(true)
+                    setLoading1(true)
+                    setLoading2(false)
+
+                    setResidentsURLEpisode(data.characters)
+
+                    await searchResidentsEpisodes()
+                    
+                } catch{
+
+                }
             }
         }
         fetchCharacter()
-    }, [id,residents,residentsURL])
+    }, [id,residents,residentsURL,residentsURLEpisode,residentsEpisode])
 
     const renderResidents = () => {
         if (!loading1) {
@@ -92,10 +128,31 @@ export default function InfoCard() {
                 <Link className="backLink" to='/location' style={{margin:'30px 0'}}>Go Back <BsBoxArrowLeft/></Link>
                 </>
             )
-        } else {
+        } else if(!loading2){
+    
+            return (
+                <>
+                <h3 style={{margin:'40px 0px'}}>Residents</h3>
+                <div className="cards">
+                    {residentsEpisode.map((el) => (
+                        <>
+                        <div key={el.id} className="card">
+                            <img src={el.image} alt={el.name} />
+                            <div className="info">
+                                <h2>{el.name}</h2>
+                                <p>{el.species}</p>
+                            </div>
+                        </div>
+                        </>
+                    ))}
+                </div>
+                <Link className="backLink" to='/episodes' style={{margin:'30px 0'}}>Go Back <BsBoxArrowLeft/></Link>
+                </>
+            )
+        }else {
             return <p>Loading Residents...</p>
         }
-    };
+    }
 
     const render = (value) => {
         if (value === 1) {
@@ -176,6 +233,33 @@ export default function InfoCard() {
                     )}
                 </>
             )
+        }else if (value === 3) {
+            return (
+                <>
+                    {loading2 ? (
+                        <p>Loading...</p>
+                    ) : (
+                        character && (
+                            <main className="container_description">
+                                <h1>{character.name}</h1>
+                                <div className="description">
+                                    <div>
+                                        <h3>Episode</h3>
+                                        <br/>
+                                        <span>{character.episode}</span>
+                                    </div>
+                                    <div>
+                                        <h3>Date</h3>
+                                        <br/>
+                                        <span>{character.air_date}</span>
+                                    </div>
+                                </div>
+                                {renderResidents()}
+                            </main>
+                        )
+                    )}
+                </>
+            )
         }
     }
 
@@ -184,6 +268,7 @@ export default function InfoCard() {
             <Nav />
             {!loading ? render(1): ''}
             {!loading1 && residents ? render(2): ''}
+            {!loading2 && residentsEpisode ? render(3): ''}
         </>
     )
 }
