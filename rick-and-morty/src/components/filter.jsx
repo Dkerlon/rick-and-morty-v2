@@ -10,18 +10,9 @@ export default function Filters(){
     const [gender,setGender] = useState('')
     const [status,setStatus] = useState('')
     const [page,setPage] = useState(1)
+
     const [maxPages,setMaxPages] = useState()
     const [lista,setLista] = useState([])
-
-    async function fetchAPI(URL) {
-        const response = await fetch(`${URL}/?page=${page}&name=${name}&species=${species}&gender=${gender}&status=${status}`)
-        const data = await response.json()
-        const novaLista = data.results
-
-        setLista(novaLista)
-        setMaxPages(data.info.pages)
-
-    }
 
     useEffect(() => {
 
@@ -33,17 +24,23 @@ export default function Filters(){
             if (urlPage[1] === '/') {
                 URL = 'https://rickandmortyapi.com/api/character'
                 fetchAPI(URL)
-            } else if (urlPage[1] === '/location') {
-
-            } else if (urlPage[1] === '/episodes') {
-
             }
         }
         handleFilter()
     },[name, species, gender, status, page])
 
+    async function fetchAPI(URL) {
+        const response = await fetch(`${URL}/?page=${page}&name=${name}&species=${species}&gender=${gender}&status=${status}`)
+        const data = await response.json()
+        const novaLista = data.results
+
+        setLista(novaLista)
+        setMaxPages(data.info.pages)
+
+    }
+
     return (
-        <>
+        <main className="mains">
         <div className="filterContainer">
             <input type="text"  placeholder="Filter by name" value={name} onChange={(e) => setName(e.target.value)} className='name'/>
 
@@ -81,6 +78,6 @@ export default function Filters(){
         <button onClick={() => setPage(maxPages)}>Página {maxPages}</button>
         </div>
         <span style={{textAlign:'center',width:'100%',display:'inline-block',color:'#ccc',opacity:'0.8', marginBottom:'30px'}}>você está na página {page}</span>
-        </>
+        </main>
     )
 }

@@ -14,16 +14,6 @@ export default function Locations(){
 
     const [lista,setLista] = useState([])
 
-    async function fetchAPI(URL) {
-
-        const response = await fetch(`${URL}/?page=${page}&name=${name}&type=${type}&dimension=${dimension}`)
-        const data = await response.json()
-        const novaLista = data.results
-
-        setLista(novaLista)
-        setMaxPages(data.info.pages)
-    }
-
     useEffect(() => {
 
         const urlPage = window.location.href.split('5173')
@@ -38,12 +28,25 @@ export default function Locations(){
         }
         handleFilter()
     },[name,type,dimension,page])
+
+    async function fetchAPI(URL) {
+
+        const response = await fetch(`${URL}/?page=${page}&name=${name}&type=${type}&dimension=${dimension}`)
+        const data = await response.json()
+        const novaLista = data.results
+
+        setLista(novaLista)
+        setMaxPages(data.info.pages)
+    }
+
     return (
     <>
-    <Nav/>
-    <div className="logo">
+    <header>
+        <Nav/>
+        <div className="logo">
             <img src={vector}/>
-    </div>
+        </div>
+    </header>
     <div className="filterContainer">
             <input type="text"  placeholder="Filter by name" value={name} onChange={(e) => setName(e.target.value)} className='name'/>
 
@@ -123,14 +126,16 @@ export default function Locations(){
                 <option value='Magic Dimension'>Magic Dimension</option>
             </select>
         </div>
-        <CardLocation lista={lista}/>
-        <div className="navPages">
+        <main className="mains">
+            <CardLocation lista={lista}/>
+            <div className="navPages">
                 <button onClick={() => setPage(1)}>Página 1</button>
                 <button onClick={() => setPage(page+1)}>Avançar Página</button>
                 <button onClick={() => setPage(page-1)}>Voltar Página</button>
                 <button onClick={() => setPage(maxPages)}>Página {maxPages}</button>
-        </div>
-        <span style={{textAlign:'center',width:'100%',display:'inline-block',color:'#ccc',opacity:'0.8', marginBottom:'30px'}}>você está na página {page}</span>
+            </div>
+            <span style={{textAlign:'center',width:'100%',display:'inline-block',color:'#ccc',opacity:'0.8', marginBottom:'30px'}}>você está na página {page}</span>
+        </main>
     </>
     )
 }

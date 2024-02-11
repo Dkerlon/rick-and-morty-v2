@@ -6,10 +6,12 @@ export default function Home(){
 
     return (
         <>
-        <Nav/>
-        <div className="logo">
-            <img src={logo2}/>
-        </div>
+        <header>
+            <Nav/>
+            <div className="logo">
+                <img src={logo2}/>
+            </div>
+        </header>
         <Filters/>
         </>
     )

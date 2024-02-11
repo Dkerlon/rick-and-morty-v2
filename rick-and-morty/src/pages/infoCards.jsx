@@ -11,49 +11,17 @@ export default function InfoCard() {
     const { id } = useParams()
     const [character, setCharacter] = useState(null)
 
+    //loading = HomeInformações; Loading1 = LocationInformações; Loading2 = EpisodeInformações
     const [loading, setLoading] = useState(true)
     const [loading1, setLoading1] = useState(true)
     const [loading2, setLoading2] = useState(true)
 
+    //Arrays de requisições aos residentes
     const [residentsURL, setResidentsURL] = useState()
     const [residentsURLEpisode, setResidentsURLEpisode] = useState()
 
     const [residents, setResidents] = useState([])
     const [residentsEpisode, setResidentsEpisodes] = useState([])
-
-    const searchResidents = async () => {
-        try {
-            if (residentsURL) {
-                const promises = residentsURL.map(async (residentUrl) => {
-                    const response = await fetch(residentUrl)
-                    const data = await response.json()
-                    return data
-                })
-
-                const residentsData = await Promise.all(promises)
-                setResidents(residentsData)
-
-            }
-        } catch (error) {
-            console.error("Error fetching residents:", error)
-        }
-    }
-
-    const searchResidentsEpisodes = async () => {
-        try {
-            if(residentsURLEpisode) {
-                const promise = residentsURLEpisode.map(async (residentsURLEpisode) => {
-                    const response = await fetch(residentsURLEpisode)
-                    const data = await response.json()
-                    return data
-                })
-                const residentsData = await Promise.all(promise)
-                setResidentsEpisodes(residentsData)
-            }
-        }catch(error) {
-            console.error("Error fetching residents:", error)
-        }
-    }
 
     useEffect(() => {
         async function fetchCharacter() {
@@ -114,8 +82,42 @@ export default function InfoCard() {
         fetchCharacter()
     }, [id,residents,residentsURL,residentsURLEpisode,residentsEpisode])
 
+    const searchResidents = async () => {
+        try {
+            if (residentsURL) {
+                const promises = residentsURL.map(async (residentUrl) => {
+                    const response = await fetch(residentUrl)
+                    const data = await response.json()
+                    return data
+                })
+
+                const residentsData = await Promise.all(promises)
+                setResidents(residentsData)
+
+            }
+        } catch (error) {
+            console.error("Error fetching residents:", error)
+        }
+    }
+
+    const searchResidentsEpisodes = async () => {
+        try {
+            if(residentsURLEpisode) {
+                const promise = residentsURLEpisode.map(async (residentsURLEpisode) => {
+                    const response = await fetch(residentsURLEpisode)
+                    const data = await response.json()
+                    return data
+                })
+                const residentsData = await Promise.all(promise)
+                setResidentsEpisodes(residentsData)
+            }
+        }catch(error) {
+            console.error("Error fetching residents:", error)
+        }
+    }
+
     const renderResidents = () => {
-        if (!loading1) {
+        if (!loading1 && residents) {
             return (
                 <>
                 <h3 style={{margin:'40px 0px'}}>Residents</h3>
@@ -169,14 +171,14 @@ export default function InfoCard() {
                         <p>Loading...</p>
                     ) : (
                         character && (
-                            <div className="container">
+                            <main className="container">
                                 <header>
                                     <div className="image">
                                         <img src={character.image ? character.image : 'Unknown'} alt={character.name ? character.name : 'Unknown'} />
                                     </div>
                                     <h1>{character.name ? character.name : 'Unknown'}</h1>
                                 </header>
-                                <main>
+                                <div style={{display:'flex'}}>
                                     <div className="information">
                                         <h2>Information</h2>
                                         <ul>
@@ -207,8 +209,8 @@ export default function InfoCard() {
                                             </ul>
                                         </div>
                                     )}
-                                </main>
-                            </div>
+                                </div>
+                            </main>
                         )
                     )}
                 </>
@@ -267,6 +269,8 @@ export default function InfoCard() {
                     )}
                 </>
             )
+        }else if(value === 4){
+            return <p>Carregando</p>
         }
     }
 
@@ -276,6 +280,9 @@ export default function InfoCard() {
             {!loading ? render(1): ''}
             {!loading1 && residents ? render(2): ''}
             {!loading2 && residentsEpisode ? render(3): ''}
+            <div style={{width:'100%',textAlign:'center', margin:'240px 0px'}}>
+                {loading && loading1 && loading2 ? render(4) : ''}
+            </div>
         </>
     )
 }

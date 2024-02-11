@@ -7,9 +7,8 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from './pages/Home'
 import Locations from './pages/Location'
 import Episodes from './pages/Episodes'
-import Card from './components/card'
 import InfoCard from './pages/infoCards'
-import CardLocation from './components/cardLocation'
+
 
 
 const router = createBrowserRouter([{
